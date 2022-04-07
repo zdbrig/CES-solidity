@@ -40,23 +40,21 @@ contract CESContract is ICESInterface , ERC20 {
 
   function createTransactionReverse(
     uint256 amount,
-    address dest
+    address dest //FIXME: this parameter can be taken out, and use msg.sender
   ) external {
     require(balanceOf(dest) == 0 , "Transaction already pending" );
     _mint(dest , amount);
   }
 
-
- 
   function vote(
     address beneficiary
   ) external {
     require(voters[msg.sender] == true , "Not registred voter" );
+    //TODO: check if maximum number of votes has been already reached
     votes[beneficiary][msg.sender] = true;
+
+    
   }
-
-
-
 
   function claim(
     address beneficiary
@@ -67,7 +65,7 @@ contract CESContract is ICESInterface , ERC20 {
    uint fees = prebalance * 100 / 5;
    _burn(beneficiary , prebalance);
    IERC20(token_type).transfer(address(this), prebalance - fees);
-
+   //TODO: clean previous votings
   }
 
 

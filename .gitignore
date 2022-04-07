@@ -1,3 +1,6 @@
+.secret
+.infura
+
 # Logs
 logs
 *.log

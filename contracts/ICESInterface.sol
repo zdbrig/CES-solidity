@@ -33,20 +33,20 @@ interface ICESInterface {
 
   /**
   Vote for a transaction from Solana to ethereum
-  txid : a transaction identifier
+  txid : the transaction beneficiary
    */
   function vote(
-    uint256 txid
+    address beneficiary
   ) external;
 
 
  /**
   claims that a transaction has reached minimum votes to be executed, and make the token transfer to ethereum
-  txid : a transaction identifier
+  txid : the transaction beneficiary
   */
 
   function claim(
-    uint256 txid
+   address beneficiary
   ) external;
 
 /**

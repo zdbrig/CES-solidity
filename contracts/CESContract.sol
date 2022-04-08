@@ -53,6 +53,8 @@ contract CESContract is ICESInterface , ERC20 {
 
   event transactionCreated(uint256 amount, string sol_address);
 
+  event TxVoted(address voter, address beneficiary);
+
 
   function  createTransaction(
     uint256 amount,
@@ -80,7 +82,7 @@ contract CESContract is ICESInterface , ERC20 {
     votes[beneficiary][msg.sender] = true;
     vote_count[beneficiary] = count +1;
     tx_voters[beneficiary][count] = msg.sender;
-    
+    emit TxVoted(msg.sender , beneficiary);
   }
 
   function claim(
@@ -117,6 +119,9 @@ contract CESContract is ICESInterface , ERC20 {
   function reportVoter(
     address voter
   ) external {
+    //XXX: better if we report the transaction not the voter
+    // to avoid reporting a voter that didn't make any vote
+
     // only a voter can report another voter
     require(voters[msg.sender] == true , "Not registred voter" );
     require(reports[voter][msg.sender] == false , "Already reported by this voter");

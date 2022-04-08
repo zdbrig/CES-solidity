@@ -26,8 +26,7 @@ interface ICESInterface {
   dest: ethereum receiver address
  */
   function createTransactionReverse(
-    uint256 amount,
-    address dest
+    uint256 amount
   ) external;
 
 
@@ -42,11 +41,9 @@ interface ICESInterface {
 
  /**
   claims that a transaction has reached minimum votes to be executed, and make the token transfer to ethereum
-  txid : the transaction beneficiary
   */
 
   function claim(
-   address beneficiary
   ) external;
 
 /**
@@ -63,6 +60,8 @@ reports that a voter is cheating. If there are many reports, tokens will be take
   function reportVoter(
     address voter
   ) external;
+
+
 
 
 }
